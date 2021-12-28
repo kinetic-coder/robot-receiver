@@ -1,8 +1,14 @@
 function processRequest (requestString: string) {
     if (requestString == "G") {
+        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
+        moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
+        moveMotorZIP.show()
+        Kitronik_Move_Motor.beepHorn()
+        Kitronik_Move_Motor.beepHorn()
         Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Forward, 80)
     }
     if (requestString == "S") {
+        Kitronik_Move_Motor.beepHorn()
         Kitronik_Move_Motor.stop()
     }
     if (requestString == "<") {
@@ -20,6 +26,7 @@ radio.onReceivedString(function (receivedString) {
     basic.showString(receivedString)
     processRequest(receivedString)
 })
+let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
 radio.setGroup(50)
 basic.forever(function () {
 	
