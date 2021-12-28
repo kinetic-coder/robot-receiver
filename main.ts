@@ -1,8 +1,8 @@
 function processRequest (requestString: string) {
-    if (requestString == "GO") {
+    if (requestString == "G") {
         Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Forward, 80)
     }
-    if (requestString == "STOP") {
+    if (requestString == "S") {
         Kitronik_Move_Motor.stop()
     }
     if (requestString == "<") {
