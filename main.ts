@@ -5,12 +5,12 @@ function processRequest (requestString: string) {
     if (requestString == "STOP") {
         Kitronik_Move_Motor.stop()
     }
-    if (requestString == "LEFT") {
+    if (requestString == "TURN-LEFT") {
         Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Left, 80)
         basic.pause(100)
         Kitronik_Move_Motor.stop()
     }
-    if (requestString == "RIGHT") {
+    if (requestString == "TURN-RIGHT") {
         Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Right, 80)
         basic.pause(100)
         Kitronik_Move_Motor.stop()
