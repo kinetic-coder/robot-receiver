@@ -1,6 +1,6 @@
 function processRequest (requestString: string) {
     if (requestString == "G") {
-        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(2)
+        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
         moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.White))
         moveMotorZIP.show()
         Kitronik_Move_Motor.beepHorn()
@@ -8,7 +8,7 @@ function processRequest (requestString: string) {
         Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Forward, 80)
     }
     if (requestString == "S") {
-        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(2)
+        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
         moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
         moveMotorZIP.show()
         Kitronik_Move_Motor.beepHorn()
