@@ -1,16 +1,16 @@
 function processRequest (requestString: string) {
-    if (requestString == "MOVE-FORWARD") {
+    if (requestString == "GO") {
         Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Forward, 80)
     }
     if (requestString == "STOP") {
         Kitronik_Move_Motor.stop()
     }
-    if (requestString == "TURN-LEFT") {
+    if (requestString == "<") {
         Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Left, 80)
         basic.pause(100)
         Kitronik_Move_Motor.stop()
     }
-    if (requestString == "TURN-RIGHT") {
+    if (requestString == ">") {
         Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Right, 80)
         basic.pause(100)
         Kitronik_Move_Motor.stop()
