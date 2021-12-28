@@ -1,6 +1,7 @@
 function processRequest (requestString: string) {
     if (requestString == "G") {
-        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
+        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(0)
+        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(1)
         moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
         moveMotorZIP.show()
         Kitronik_Move_Motor.beepHorn()
