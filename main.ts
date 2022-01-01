@@ -14,12 +14,10 @@ function processRequest (requestString: string) {
     }
     if (requestString == "<") {
         Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Left, 80)
-        basic.pause(100)
         halt()
     }
     if (requestString == ">") {
         Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Right, 80)
-        basic.pause(100)
         halt()
     }
     if (requestString == "B") {
@@ -65,11 +63,11 @@ radio.onReceivedString(function (receivedString) {
 })
 function halt () {
     inMotion = 0
-    Kitronik_Move_Motor.beepHorn()
     Kitronik_Move_Motor.stop()
     moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
     moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
     moveMotorZIP.show()
+    Kitronik_Move_Motor.beepHorn()
 }
 let distance = 0
 let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
