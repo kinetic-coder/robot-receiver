@@ -1,36 +1,39 @@
+function HaltIfClose (distance: number) {
+    if (distance < 5) {
+        moveBackwards(3000)
+    }
+}
 function processRequest (requestString: string) {
     if (requestString == "G") {
-        playImperialMarch()
-        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
-        moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Yellow))
-        moveMotorZIP.show()
-        Kitronik_Move_Motor.beepHorn()
-        Kitronik_Move_Motor.beepHorn()
-        Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Forward, 80)
+        moveForward(0)
     }
     if (requestString == "S") {
-        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
-        moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
-        moveMotorZIP.show()
-        Kitronik_Move_Motor.beepHorn()
-        Kitronik_Move_Motor.stop()
+        halt()
     }
     if (requestString == "<") {
         Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Left, 80)
         basic.pause(100)
-        Kitronik_Move_Motor.stop()
+        halt()
     }
     if (requestString == ">") {
         Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Right, 80)
         basic.pause(100)
-        Kitronik_Move_Motor.stop()
+        halt()
     }
     if (requestString == "B") {
-        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
-        moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Green))
-        Kitronik_Move_Motor.beepHorn()
-        Kitronik_Move_Motor.beepHorn()
-        Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Reverse, 80)
+        moveBackwards(0)
+    }
+}
+function moveForward (duration: number) {
+    moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
+    moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Yellow))
+    moveMotorZIP.show()
+    Kitronik_Move_Motor.beepHorn()
+    Kitronik_Move_Motor.beepHorn()
+    Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Forward, 80)
+    if (duration > 0) {
+        basic.pause(duration)
+        halt()
     }
 }
 function playImperialMarch () {
@@ -41,12 +44,31 @@ function playImperialMarch () {
     music.playTone(494, music.beat(BeatFraction.Whole))
     music.playTone(392, music.beat(BeatFraction.Whole))
 }
+function moveBackwards (duration: number) {
+    moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
+    moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Green))
+    Kitronik_Move_Motor.beepHorn()
+    Kitronik_Move_Motor.beepHorn()
+    Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Reverse, 80)
+    if (duration > 0) {
+        basic.pause(duration)
+        halt()
+    }
+}
 radio.onReceivedString(function (receivedString) {
     basic.showString(receivedString)
     processRequest(receivedString)
 })
+function halt () {
+    Kitronik_Move_Motor.beepHorn()
+    Kitronik_Move_Motor.stop()
+    moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
+    moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
+    moveMotorZIP.show()
+}
 let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
 radio.setGroup(50)
+Kitronik_Move_Motor.setUltrasonicUnits(Kitronik_Move_Motor.Units.Centimeters)
 basic.forever(function () {
-	
+    HaltIfClose(1)
 })
