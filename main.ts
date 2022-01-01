@@ -25,6 +25,9 @@ function processRequest (requestString: string) {
     if (requestString == "B") {
         moveBackwards(0)
     }
+    if (requestString == "QD") {
+        sendDistance()
+    }
 }
 function moveForward (duration: number) {
     inMotion = 1
@@ -59,6 +62,9 @@ function moveBackwards (duration: number) {
         halt()
     }
 }
+function sendDistance () {
+    radio.sendString("" + (distance))
+}
 radio.onReceivedString(function (receivedString) {
     basic.showString(receivedString)
     processRequest(receivedString)
@@ -77,10 +83,14 @@ let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
 let inMotion = 0
 radio.setGroup(50)
 Kitronik_Move_Motor.setUltrasonicUnits(Kitronik_Move_Motor.Units.Centimeters)
+Kitronik_Move_Motor.motorBalance(Kitronik_Move_Motor.SpinDirections.Left, 3)
 basic.forever(function () {
 	
 })
 control.inBackground(function () {
-    distance = Kitronik_Move_Motor.measure()
-    HaltIfClose(distance)
+    while (true) {
+        distance = Kitronik_Move_Motor.measure()
+        HaltIfClose(distance)
+        basic.pause(500)
+    }
 })
