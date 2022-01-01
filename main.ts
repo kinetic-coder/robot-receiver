@@ -1,5 +1,8 @@
 function HaltIfClose (distance: number) {
     basic.showString("" + (distance))
+    if (distance < 5) {
+        moveBackwards(1000)
+    }
 }
 function processRequest (requestString: string) {
     if (requestString == "G") {
@@ -64,9 +67,11 @@ function halt () {
     moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
     moveMotorZIP.show()
 }
+let distance = 0
 let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
 radio.setGroup(50)
 Kitronik_Move_Motor.setUltrasonicUnits(Kitronik_Move_Motor.Units.Centimeters)
 basic.forever(function () {
-    HaltIfClose(1)
+    distance = Kitronik_Move_Motor.measure()
+    HaltIfClose(distance)
 })
