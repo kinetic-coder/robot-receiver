@@ -1,7 +1,5 @@
 function HaltIfClose (distance: number) {
-    if (distance < 5) {
-        moveBackwards(3000)
-    }
+    basic.showString("" + (distance))
 }
 function processRequest (requestString: string) {
     if (requestString == "G") {
