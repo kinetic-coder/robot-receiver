@@ -1,6 +1,8 @@
 function HaltIfClose (distance: number) {
-    if (distance < 5) {
-        halt()
+    if (inMotion == 1) {
+        if (distance < 5) {
+            halt()
+        }
     }
 }
 function processRequest (requestString: string) {
@@ -25,6 +27,7 @@ function processRequest (requestString: string) {
     }
 }
 function moveForward (duration: number) {
+    inMotion = 1
     moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
     moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Yellow))
     moveMotorZIP.show()
@@ -45,6 +48,7 @@ function playImperialMarch () {
     music.playTone(392, music.beat(BeatFraction.Whole))
 }
 function moveBackwards (duration: number) {
+    inMotion = 1
     moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
     moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Green))
     Kitronik_Move_Motor.beepHorn()
@@ -60,6 +64,7 @@ radio.onReceivedString(function (receivedString) {
     processRequest(receivedString)
 })
 function halt () {
+    inMotion = 0
     Kitronik_Move_Motor.beepHorn()
     Kitronik_Move_Motor.stop()
     moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
@@ -68,6 +73,7 @@ function halt () {
 }
 let distance = 0
 let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
+let inMotion = 0
 radio.setGroup(50)
 Kitronik_Move_Motor.setUltrasonicUnits(Kitronik_Move_Motor.Units.Centimeters)
 basic.forever(function () {
