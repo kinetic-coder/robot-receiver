@@ -13,11 +13,13 @@ function processRequest (requestString: string) {
         halt()
     }
     if (requestString == "<") {
-        Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Left, 80)
+        Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Left, 60)
+        basic.pause(100)
         halt()
     }
     if (requestString == ">") {
-        Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Right, 80)
+        Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Right, 60)
+        basic.pause(100)
         halt()
     }
     if (requestString == "B") {
@@ -68,6 +70,7 @@ function halt () {
     moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Red))
     moveMotorZIP.show()
     Kitronik_Move_Motor.beepHorn()
+    basic.clearScreen()
 }
 let distance = 0
 let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
@@ -75,6 +78,9 @@ let inMotion = 0
 radio.setGroup(50)
 Kitronik_Move_Motor.setUltrasonicUnits(Kitronik_Move_Motor.Units.Centimeters)
 basic.forever(function () {
+	
+})
+control.inBackground(function () {
     distance = Kitronik_Move_Motor.measure()
     HaltIfClose(distance)
 })
