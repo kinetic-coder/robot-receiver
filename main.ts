@@ -1,7 +1,7 @@
 function processRequest (requestString: string) {
     if (requestString == "G") {
         moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
-        moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.White))
+        moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Yellow))
         moveMotorZIP.show()
         Kitronik_Move_Motor.beepHorn()
         Kitronik_Move_Motor.beepHorn()
@@ -23,6 +23,13 @@ function processRequest (requestString: string) {
         Kitronik_Move_Motor.spin(Kitronik_Move_Motor.SpinDirections.Right, 80)
         basic.pause(100)
         Kitronik_Move_Motor.stop()
+    }
+    if (requestString == "B") {
+        moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
+        moveMotorZIP.showColor(Kitronik_Move_Motor.colors(Kitronik_Move_Motor.ZipLedColors.Green))
+        Kitronik_Move_Motor.beepHorn()
+        Kitronik_Move_Motor.beepHorn()
+        Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Reverse, 80)
     }
 }
 radio.onReceivedString(function (receivedString) {
