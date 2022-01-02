@@ -81,9 +81,13 @@ function halt () {
 let distance = 0
 let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
 let inMotion = 0
+basic.showIcon(IconNames.Happy)
+basic.pause(100)
+basic.showString("Hello, I'm BAINY!!")
+basic.pause(100)
 radio.setGroup(50)
 Kitronik_Move_Motor.setUltrasonicUnits(Kitronik_Move_Motor.Units.Centimeters)
-Kitronik_Move_Motor.motorBalance(Kitronik_Move_Motor.SpinDirections.Left, 11)
+Kitronik_Move_Motor.motorBalance(Kitronik_Move_Motor.SpinDirections.Left, 15)
 basic.forever(function () {
 	
 })
