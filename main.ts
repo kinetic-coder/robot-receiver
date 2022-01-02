@@ -83,7 +83,7 @@ let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
 let inMotion = 0
 radio.setGroup(50)
 Kitronik_Move_Motor.setUltrasonicUnits(Kitronik_Move_Motor.Units.Centimeters)
-Kitronik_Move_Motor.motorBalance(Kitronik_Move_Motor.SpinDirections.Left, 3)
+Kitronik_Move_Motor.motorBalance(Kitronik_Move_Motor.SpinDirections.Left, 11)
 basic.forever(function () {
 	
 })
@@ -92,5 +92,6 @@ control.inBackground(function () {
         distance = Kitronik_Move_Motor.measure()
         HaltIfClose(distance)
         basic.pause(500)
+        music.playMelody("- - - - - - - - ", 120)
     }
 })
